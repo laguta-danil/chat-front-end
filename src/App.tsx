@@ -1,3 +1,5 @@
+
+import { HeaderMain } from './components/header/HeaderMain';
 import React from "react";
 import "./App.css";
 import { HomePage } from "./components/HomePage";
@@ -9,9 +11,11 @@ import {
   Link
 } from "react-router-dom";
 
+
 function App() {
   return (
     <div className="App">
+      <HeaderMain />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />}/>

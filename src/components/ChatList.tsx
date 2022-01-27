@@ -30,7 +30,7 @@ export const ChatList = () => {
     };
 
     return (
-      <div style={{width:'300px'}}>
+      <div >
           <List
       size="small"
       header={<div>Chats</div>}

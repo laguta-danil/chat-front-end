@@ -1,29 +1,35 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/counterSlice'
-import { RootState } from '../redux/store'
+import { Col, Row } from "antd";
+import React from "react";
+import { ChatComponent } from "./ChatComponent";
+import { ChatList } from "./ChatList";
 
 export const HomePage = () => {
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
 
   return (
-    <div>
-      <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </button>
-      </div>
-    </div>
-  )
-}
+    <Row>
+      <Col span={4}>
+        <ChatList />
+      </Col>
+      <Col span={20}>
+        <ChatComponent />
+      </Col>
+    </Row>
+  );
+};
+
+
+{/* <Col span={12}>
+<button
+  aria-label="Increment value"
+  onClick={() => dispatch(increment())}
+>
+  Increment
+</button>
+<span>{count}</span>
+<button
+  aria-label="Decrement value"
+  onClick={() => dispatch(decrement())}
+>
+  Decrement
+</button>
+</Col> */}

@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import { HomePage } from './components/HomePage';
-import { RegLog } from './components/RegistrationLogin';
+import React from "react";
+import "./App.css";
+import { HomePage } from "./components/HomePage";
+import { RegLog } from "./components/RegistrationLogin";
 
 function App() {
   return (

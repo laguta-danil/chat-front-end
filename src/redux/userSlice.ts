@@ -19,24 +19,24 @@ export const userSlice = createSlice ({
 
 })
 
-export const signUpUser = createSlice ({
-    name:'signUpUser',
-    initialState: {
-        username: '',
-        email: '',
-        isFetching: false,
-        isSuccess: false,
-        isError: false,
-        errorMessage: '',
-    },
-    reducers: {
+// export const signUpUser = createSlice ({
+//     name:'signUpUser',
+//     initialState: {
+//         username: '',
+//         email: '',
+//         isFetching: false,
+//         isSuccess: false,
+//         isError: false,
+//         errorMessage: '',
+//     },
+//     reducers: {
 
-    },
-    extraReducers: {
+//     },
+//     extraReducers: {
 
-    },
+//     },
 
-})
+// })
 
 
 export const userSelector = (state: { user: any; }) => state.user

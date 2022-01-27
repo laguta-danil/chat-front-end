@@ -15,11 +15,6 @@ export const HomePage = () => {
           <ChatComponent />
         </Col>
       </Row>
-      <Row>
-        <Col span={24}>
-          <RegLog />
-        </Col>
-      </Row>
     </>
   );
 };

@@ -1,3 +1,4 @@
+import messagesSlice from './messagesSlice';
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './counterSlice'
 import chatSlice from './chatSlice'
@@ -5,7 +6,9 @@ import chatSlice from './chatSlice'
 export const store = configureStore({
   reducer: {
       counter: counterSlice,
-      chat: chatSlice,
+      ms: messagesSlice,
+      chat: chatSlice
+
   },
 })
 

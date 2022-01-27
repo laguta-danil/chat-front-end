@@ -1,22 +1,44 @@
 import { Tabs } from "antd";
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useEffect, useState } from "react";
+
+import { useDispatch, useSelector, useStore } from "react-redux";
+import { userSelector } from "../redux/userSlice";
 
 const{ TabPane } = Tabs;
 
-
 export const RegLog = () => {
+    const[state, setState] = useState()
 
     function callback(key: any) {
         console.log(key)
+        
     }; 
 
     const onFinish = (values:any) => {
         console.log('Success:', values);
+        setState(values)
     };
+    console.log(state)
 
     const onFinishFailed = (errorInfo:any) => {
         console.log('Failed:', errorInfo);
     };
+
+    // for registration
+    const dispatch = useDispatch();
+    const { isFetching, isSuccess, isError, errorMessage } = useSelector(
+        userSelector
+    );
+    const handleSubmitReg = () => {
+        console.log("click on submit Reg");
+    }
+
+    // useEffect(()=>{
+    //     return () => {
+    //         dispatch(clearState());
+    //     };
+    // }, []);
     
     return(
         <Tabs onChange={callback} type="card">
@@ -57,7 +79,7 @@ export const RegLog = () => {
 
 
                 <Form.Item wrapperCol={{ offset: 6, span: 12 }}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" onSubmit={handleSubmitReg}>
                     Submit
                   </Button>
                 </Form.Item>

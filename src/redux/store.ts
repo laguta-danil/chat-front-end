@@ -1,11 +1,14 @@
+
 import messagesSlice from './messagesSlice';
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './counterSlice'
 import chatSlice from './chatSlice'
 
+
 export const store = configureStore({
   reducer: {
       counter: counterSlice,
+      user: userSlice,
       ms: messagesSlice,
       chat: chatSlice
 

@@ -2,6 +2,7 @@ import { Form, Input, Button, Checkbox } from 'antd'
 import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector, useStore } from 'react-redux'
+import { signupUser } from '../redux/users.auth.actions'
 import { userSelector } from '../redux/userSlice'
 
 
@@ -10,10 +11,11 @@ export const SignUp = () => {
 
 	
 	const onFinish = (values: any) => {
+		dispatch(signupUser(values))
 		console.log('Success:', values)
 		setState(values)
 	}
-	console.log(state)
+	// console.log(state)
 
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo)
@@ -49,6 +51,19 @@ export const SignUp = () => {
 					{
 						pattern: /^[a-zA-Z0-9]+$/,
 						message: 'Name can only include letters and numbers.',
+					},
+				]}
+			>
+				<Input />
+			</Form.Item>
+
+			<Form.Item
+				name='email'
+				label='E-mail'
+				rules={[
+					{
+						required: true,
+						message: 'Please input your E-mail!',
 					},
 				]}
 			>

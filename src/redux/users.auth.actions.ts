@@ -4,21 +4,18 @@ export const signupUser: any = createAsyncThunk(
     'users/signupUser',
     async ({ name, email, password }:any, thunkAPI) => {
       try {
-        const response = await fetch(
-          'https://mock-user-auth-server.herokuapp.com/api/v1/users',
-          {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name,
-              email,
-              password,
-            }),
-          }
-        );
+        const response = await fetch('http://localhost:5000/user/create', {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						name,
+						email,
+						password,
+					}),
+				})
         let data = await response.json();
         console.log('data', data);
   

@@ -4,7 +4,8 @@ import "antd/dist/antd.css";
 import { RootState, AppDispatch } from "../redux/store";
 import { addChat, deleteChat, ChatState } from "../redux/chatSlice";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import path from "path/posix";
 
 export const ChatList = () => {
   const { Text } = Typography;
@@ -14,6 +15,10 @@ export const ChatList = () => {
   const chats = useSelector((state: RootState) => state.chat);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  let params = useParams();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -42,7 +47,14 @@ export const ChatList = () => {
               <Text>{item.title}</Text>
               <Button
                 type="primary"
-                onClick={() => dispatch(deleteChat(item.title))}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  dispatch(deleteChat(item.id));
+                  if (params.id === item.id) {
+                    navigate('/');
+                  }
+                }}
               >
                 X
               </Button>

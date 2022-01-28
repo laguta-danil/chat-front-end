@@ -17,3 +17,8 @@ code {
   width: 600px;
   border: 1px solid #d9d9d9;
 }
+
+.register-form,
+.login-form {
+  text-align: center;
+}

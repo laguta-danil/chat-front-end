@@ -72,6 +72,11 @@ export const SignUp = () => {
 						required: true,
 						message: 'Please input your E-mail!',
 					},
+					{
+						required: true,
+						type: 'email',
+						message: 'The input is not valid E-mail!',
+					},
 				]}
 			>
 				<Input />

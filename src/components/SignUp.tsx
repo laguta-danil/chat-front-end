@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { userSelector } from '../redux/userSlice'
 
-export const SignIn = () => {
 
+export const SignUp = () => {
 	const [state, setState] = useState()
 
+	
 	const onFinish = (values: any) => {
 		console.log('Success:', values)
 		setState(values)
@@ -19,16 +20,16 @@ export const SignIn = () => {
 	}
 
 	const dispatch = useDispatch()
-
+	
 	const handleSubmitReg = () => {
 		console.log('click on submit Reg')
 	}
 
+
 	return (
 		<Form
-			name='login'
-			className='login-form'
-
+			name='register'
+			className='register-form'
 			labelCol={{ span: 6 }}
 			wrapperCol={{ span: 12 }}
 			initialValues={{ remember: true }}
@@ -36,7 +37,7 @@ export const SignIn = () => {
 			onFinishFailed={onFinishFailed}
 			autoComplete='off'
 		>
-			<h2>Sign in</h2>
+			<h2>Sign up</h2>
 			<Form.Item
 				label='Username'
 				name='username'
@@ -50,7 +51,6 @@ export const SignIn = () => {
 						message: 'Name can only include letters and numbers.',
 					},
 				]}
-
 			>
 				<Input />
 			</Form.Item>
@@ -63,8 +63,28 @@ export const SignIn = () => {
 				<Input.Password />
 			</Form.Item>
 
-			<Form.Item wrapperCol={{ offset: 6, span: 12 }}>
+			<Form.Item
+				label='ConfirmPassword'
+				name='confirmPassword'
+				rules={[
+					{ required: true, message: 'Please confirm your password!' },
+					({ getFieldValue }) => ({
+						validator(_, value) {
+							if (!value || getFieldValue('password') === value) {
+								return Promise.resolve()
+							}
+							return Promise.reject(
+								new Error('The two passwords that you entered do not match!')
+							)
+						},
+					}),
+				]}
+			>
+				<Input.Password />
+			</Form.Item>
 
+			<Form.Item wrapperCol={{ offset: 6, span: 12 }}>
+				<Button type='primary' htmlType='submit' onSubmit={handleSubmitReg}>
 					Submit
 				</Button>
 			</Form.Item>

@@ -10,9 +10,7 @@ export const HomePage = () => {
 				<Col span={4}>
 					<ChatList />
 				</Col>
-				<Col span={20}>
-					
-				</Col>
+				<Col span={20}></Col>
 			</Row>
 		</>
 	)

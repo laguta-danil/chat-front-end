@@ -1,46 +1,47 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface MessageState {
-  message: string;
-  users: Array<string>;
-  id: number;
+	message: string
+	userId: string
+	id: number
 }
 const initialState: Array<MessageState> = [
-  {
-    message: "odsad",
-    users: [],
-    id: 1,
-  },
-  {
-    message: "dasdasd",
-    users: [],
-    id: 2,
-  },
-  {
-    message: "asdasd",
-    users: [],
-    id: 3,
-  },
-];
+	{
+		message: 'First message',
+		userId: '',
+		id: 1,
+	},
+	{
+		message: 'Second message',
+		userId: '',
+		id: 2,
+	},
+	{
+		message: 'Third message',
+		userId: '',
+		id: 3,
+	},
+]
 
 export const messagesSlice = createSlice({
-  name: "ms",
-  initialState,
-  reducers: {
-    addMessages: (state: any, action: any) => {
-      console.log(action);
+	name: 'ms',
+	initialState,
+	reducers: {
+		addMessages: (state: any, action: any) => {
+			state = state.push({
+				message: action.payload,
+				userId: 'Name1',
+				id: (state.length += 1),
+			})
+		},
+		// deleteMessage: (state, action: PayloadAction<MessagesState>) => {
 
-      state = state.push({message: action.payload, users: [], id: state.length += 1  });
-      console.log(state);
-    },
-    // deleteMessage: (state, action: PayloadAction<MessagesState>) => {
-
-    //   state.id -= 1
-    // }
-  },
-});
+		//   state.id -= 1
+		// }
+	},
+})
 
 // Action creators are generated for each case reducer function
-export const { addMessages } = messagesSlice.actions;
+export const { addMessages } = messagesSlice.actions
 
-export default messagesSlice.reducer;
+export default messagesSlice.reducer

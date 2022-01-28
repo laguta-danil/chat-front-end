@@ -5,6 +5,7 @@ import { useDispatch, useSelector, useStore } from 'react-redux'
 import { userSelector } from '../redux/userSlice'
 
 export const SignIn = () => {
+
 	const [state, setState] = useState()
 
 	const onFinish = (values: any) => {
@@ -27,6 +28,7 @@ export const SignIn = () => {
 		<Form
 			name='login'
 			className='login-form'
+
 			labelCol={{ span: 6 }}
 			wrapperCol={{ span: 12 }}
 			initialValues={{ remember: true }}
@@ -48,6 +50,7 @@ export const SignIn = () => {
 						message: 'Name can only include letters and numbers.',
 					},
 				]}
+
 			>
 				<Input />
 			</Form.Item>
@@ -61,7 +64,7 @@ export const SignIn = () => {
 			</Form.Item>
 
 			<Form.Item wrapperCol={{ offset: 6, span: 12 }}>
-				<Button type='primary' htmlType='submit' onSubmit={handleSubmitReg}>
+
 					Submit
 				</Button>
 			</Form.Item>

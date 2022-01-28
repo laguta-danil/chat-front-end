@@ -14,8 +14,8 @@ function App() {
 			<Router>
 				<HeaderMain />
 				<Routes>
-					<Route path='/' element={<HomePage />} />
-					<Route path='/chat/:id' element={<ChatList />} />
+					<Route path='/' element={<ChatList />} />
+					<Route path='/chat/:id' element={<HomePage />} />
 					<Route path='/signup' element={<SignUp />} />
 					<Route path='/signin' element={<SignIn />} />
 				</Routes>

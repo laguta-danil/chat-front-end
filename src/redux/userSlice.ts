@@ -10,7 +10,17 @@ export const userSlice = createSlice({
 		isError: false,
 		errorMessage: '',
 	},
-	reducers: {},
+	reducers: {
+		clearState: (state) => {
+			state.name = '';
+		  state.email = '';
+			state.isError = false;
+			state.isSuccess = false;
+			state.isFetching = false;
+
+			return state;
+		}
+	},
 	extraReducers: {},
 })
 
@@ -34,5 +44,6 @@ export const userSlice = createSlice({
 // })
 
 export const userSelector = (state: { user: any }) => state.user
+export const {clearState} = userSlice.actions;
 
 export default userSlice.reducer

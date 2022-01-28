@@ -3,25 +3,31 @@ import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector, useStore } from 'react-redux'
 import { signupUser } from '../redux/users.auth.actions'
-import { userSelector } from '../redux/userSlice'
+import { clearState, userSelector } from '../redux/userSlice'
 
 
 export const SignUp = () => {
-	const [state, setState] = useState()
+	const dispatch = useDispatch();
 
+	const [state, setState] = useState()
+  const { isFetching, isSuccess, isError, errorMessage } =
+		useSelector(userSelector)
 	
+	const [form] = Form.useForm()	
+
 	const onFinish = (values: any) => {
 		dispatch(signupUser(values))
+
 		console.log('Success:', values)
+
 		setState(values)
+		form.resetFields()
 	}
-	// console.log(state)
 
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo)
 	}
 
-	const dispatch = useDispatch()
 	
 	const handleSubmitReg = () => {
 		console.log('click on submit Reg')
@@ -30,6 +36,7 @@ export const SignUp = () => {
 
 	return (
 		<Form
+			form={form}
 			name='register'
 			className='register-form'
 			labelCol={{ span: 6 }}

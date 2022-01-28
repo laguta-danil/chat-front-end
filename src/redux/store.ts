@@ -1,20 +1,15 @@
-import messagesSlice from './messagesSlice';
+import messagesSlice from './messagesSlice'
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './counterSlice'
 import chatSlice from './chatSlice'
-import userSlice from './userSlice';
-
+import userSlice from './userSlice'
 
 export const store = configureStore({
-  reducer: {
-      counter: counterSlice,
-      user: userSlice,
-      ms: messagesSlice,
-      chat: chatSlice
-
-  },
+	reducer: {
+		user: userSlice,
+		ms: messagesSlice,
+		chat: chatSlice,
+	},
 })
-
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

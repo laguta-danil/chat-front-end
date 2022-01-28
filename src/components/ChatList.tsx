@@ -43,7 +43,7 @@ export const ChatList = () => {
         dataSource={chats}
         renderItem={(item) => (
           <Link to={`/chat/${item.id}`}>
-            <List.Item>
+            <List.Item key={item.id}>
               <Text>{item.title}</Text>
               <Button
                 type="primary"

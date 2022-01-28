@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface ChatState {
 	title: string
 	users: Array<string>
+  messages: Array<any>
 	id: string
 }
 
@@ -10,16 +11,19 @@ const initialState: Array<ChatState> = [
 	{
 		title: 'Chat 1',
 		users: [],
+    messages: [],
 		id: '1',
 	},
 	{
 		title: 'Chat 2',
 		users: [],
+    messages: [],
 		id: '2',
 	},
 	{
 		title: 'Chat 3',
 		users: [],
+    messages: [],
 		id: '3',
 	},
 ]

@@ -3,7 +3,7 @@ import React from 'react'
 import { ChatComponent } from './ChatComponent'
 import { ChatList } from './ChatList'
 
-export const HomePage = () => {
+export const ChatPage = () => {
 	return (
 		<>
 			<Row>
@@ -11,7 +11,7 @@ export const HomePage = () => {
 					<ChatList />
 				</Col>
 				<Col span={20}>
-					
+					<ChatComponent />
 				</Col>
 			</Row>
 		</>

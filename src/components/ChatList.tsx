@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from "../redux/store";
 import { addChat, deleteChat, ChatState } from "../redux/chatSlice";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import path from "path/posix";
+
 
 export const ChatList = () => {
   const { Text } = Typography;
@@ -51,8 +51,8 @@ export const ChatList = () => {
                   e.preventDefault();
                   e.stopPropagation();
                   dispatch(deleteChat(item.id));
-                  if (params.id === item.id) {
-                    navigate('/');
+                  if (params.id == item.id) {
+                    navigate("/");
                   }
                 }}
               >
@@ -75,17 +75,19 @@ export const ChatList = () => {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
           autoComplete="off"
         >
-          <Form.Item label="Chat name" name="chatname">
-            <Input onChange={(e) => setTitle(e.currentTarget.value)} />
+          <Form.Item label="Chat name">
+            <Input value={title} onChange={(e) => setTitle(e.currentTarget.value)} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button
               type="primary"
-              htmlType="submit"
-              onClick={() => dispatch(addChat({ title }))}
+              onClick={() => {
+                dispatch(addChat({ title }));
+                setTitle("");
+                console.log(title);
+              }}
             >
               Add chat
             </Button>

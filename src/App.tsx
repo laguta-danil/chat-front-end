@@ -3,10 +3,9 @@ import React from 'react'
 import './App.css'
 import { HomePage } from './components/HomePage'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { ChatComponent } from './components/ChatComponent'
 import { ChatList } from './components/ChatList'
 import { SignUp } from './components/SignUp'
-import { SignIn } from './components/SingIn'
+import { SignIn } from './components/SignIn'
 
 function App() {
 	return (

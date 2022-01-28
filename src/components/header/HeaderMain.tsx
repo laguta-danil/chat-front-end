@@ -41,13 +41,15 @@ export const HeaderMain = () => {
 						paddingRight: 25,
 					}}
 				>
-					<Link to='/signup'>
+					<Link to='/signin'>
 						<Button key='3'>Sign In</Button>
-						<Button key='2'>Sign Up</Button>
-						<Button key='1' type='primary'>
-							Exit
-						</Button>
 					</Link>
+					<Link to='/signup'>
+						<Button key='2'>Sign Up</Button>
+					</Link>
+					<Button key='1' type='primary'>
+						Exit
+					</Button>
 				</Col>
 			</Row>
 		</>

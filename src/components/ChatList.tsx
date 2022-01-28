@@ -1,21 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { List, Typography, Button, Modal, Form, Input } from 'antd'
 import 'antd/dist/antd.css'
-import { RootState, AppDispatch } from '../redux/store'
-import { addChat, deleteChat, ChatState, fetchChats } from '../redux/chatSlice'
+import { RootState } from '../redux/store'
+import { ChatState, fetchChats, addNewChat, deleteChatById } from '../redux/chatSlice'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 export const ChatList = () => {
+  const [textData, setChatData] = useState({
+		name: '',
+		users: [],
+		messages: [],
+	})
+
 	const { Text } = Typography
 
 	const chats = useSelector((state: RootState) => state.chat)
+  const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(fetchChats())
-	}, [])
+	}, [textData])
 
-	const dispatch = useDispatch()
+	
 
 	const navigate = useNavigate()
 
@@ -35,12 +42,6 @@ export const ChatList = () => {
 		setIsModalVisible(false)
 	}
 
-	const [chatData, setChatData] = useState({
-		name: '',
-		users: [],
-		messages: [],
-		_id: '',
-	})
 
 	return (
 		<div>
@@ -58,7 +59,7 @@ export const ChatList = () => {
 								onClick={e => {
 									e.preventDefault()
 									e.stopPropagation()
-									dispatch(deleteChat(item._id))
+									dispatch(deleteChatById())
 									if (params.id == item._id) {
 										navigate('/')
 									}
@@ -87,9 +88,9 @@ export const ChatList = () => {
 				>
 					<Form.Item label='Chat name'>
 						<Input
-							value={chatData.name}
+							value={textData.name}
 							onChange={e =>
-								setChatData({ ...chatData, name: e.currentTarget.value })
+								setChatData({ ...textData, name: e.currentTarget.value })
 							}
 						/>
 					</Form.Item>
@@ -97,8 +98,9 @@ export const ChatList = () => {
 						<Button
 							type='primary'
 							onClick={() => {
-								dispatch(chatData)
-								setChatData({ name: '', users: [], messages: [], _id: '' })
+								dispatch(addNewChat(textData))
+								setChatData({ ...textData, name: '', users: [], messages: []})
+                console.log(textData)
 							}}
 						>
 							Add chat

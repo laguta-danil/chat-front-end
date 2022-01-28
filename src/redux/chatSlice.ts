@@ -30,7 +30,7 @@ export const chatSlice = createSlice({
       return [...state, {...action.payload, id: 0, users: []}]
     },
     deleteChat: (state: any, action) => {
-      return state.filter((item:any)=>item.title !=action.payload)
+      return state.filter((item:any)=>item.id !=action.payload)
     }
   }
 })

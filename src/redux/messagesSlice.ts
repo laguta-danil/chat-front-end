@@ -27,21 +27,20 @@ export const messagesSlice = createSlice({
 	name: 'ms',
 	initialState,
 	reducers: {
-		addMessages: (state: any, action: any) => {
+		addMessages: (state: any, action) => {
 			state = state.push({
 				message: action.payload,
 				userId: 'Name1',
 				id: (state.length += 1),
 			})
 		},
-		// deleteMessage: (state, action: PayloadAction<MessagesState>) => {
-
-		//   state.id -= 1
-		// }
+		deleteMessage: (state: any, action) => {
+			return state.filter((el: any) => el.id !== action.payload)
+		},
 	},
 })
 
 // Action creators are generated for each case reducer function
-export const { addMessages } = messagesSlice.actions
+export const { addMessages, deleteMessage } = messagesSlice.actions
 
 export default messagesSlice.reducer

@@ -1,8 +1,7 @@
 import { Form, Input, Button, Checkbox } from 'antd'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { useDispatch, useSelector, useStore } from 'react-redux'
-import { userSelector } from '../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 export const SignIn = () => {
 	const [state, setState] = useState()

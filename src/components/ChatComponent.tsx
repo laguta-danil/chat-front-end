@@ -1,8 +1,8 @@
-import { AliwangwangOutlined } from '@ant-design/icons'
+import { AliwangwangOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Input, List } from 'antd'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addMessages } from '../redux/messagesSlice'
+import { addMessages, deleteMessage } from '../redux/messagesSlice'
 import { RootState } from '../redux/store'
 
 export const ChatComponent = () => {
@@ -10,7 +10,6 @@ export const ChatComponent = () => {
 	const messages = useSelector((state: RootState) => state.ms)
 	const dispatch = useDispatch()
 
-	console.log(messages)
 	return (
 		<>
 			<List
@@ -24,17 +23,31 @@ export const ChatComponent = () => {
 			>
 				{messages.map((el, i) => {
 					return (
-						<List.Item
-							style={{
-								margin: 5,
-								background: '#ff7a45',
-								display: 'flex',
-								justifyContent: 'flex-end',
-							}}
-							key={i}
-						>
-							{el.message}
-						</List.Item>
+						<>
+							<List.Item
+								style={{
+									margin: 5,
+									background: '#ff7a45',
+									display: 'flex',
+									justifyContent: 'flex-end',
+								}}
+								key={i}
+							>
+								{el.message}
+								<Button
+									style={{
+										color: 'white',
+										background: '#ff7a45',
+										border: 'none',
+									}}
+									size='small'
+									icon={<DeleteOutlined />}
+									onClick={e => {
+										dispatch(deleteMessage(el.id))
+									}}
+								></Button>
+							</List.Item>
+						</>
 					)
 				})}
 			</List>

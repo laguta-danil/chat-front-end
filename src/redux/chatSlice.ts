@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { stat } from "fs";
 
 export interface ChatState {
   name: string;
@@ -41,9 +42,9 @@ export const addNewChat = createAsyncThunk(
 
 export const deleteChatById = createAsyncThunk(
   "chats/deleteChatById",
-  async (thunkAPI) => {
+  async (id:string, thunkAPI) => {
     try {
-      const res: any = await axios.delete(`http://localhost:5000/chats/:id`)
+      const res: any = await axios.delete(`http://localhost:5000/chats/${id}`)
     } catch (error) {
       console.log(error)
     }
@@ -68,6 +69,12 @@ export const chatSlice = createSlice({
     },
     [addNewChat.pending.type]: (state) => {},
     [addNewChat.rejected.type]: (state, action: PayloadAction<string>) => {},
+    [deleteChatById.fulfilled.type]: (state, action) => {
+      console.log(action.payload)
+      return state.filter((item)=>item._id!=action.payload)
+    },
+    [deleteChatById.pending.type]: (state) => {},
+    [deleteChatById.rejected.type]: (state, action: PayloadAction<string>) => {},
   },
   
 });

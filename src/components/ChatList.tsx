@@ -20,7 +20,7 @@ export const ChatList = () => {
 
 	useEffect(() => {
 		dispatch(fetchChats())
-	}, [textData])
+	}, [chats])
 
 	
 
@@ -59,7 +59,7 @@ export const ChatList = () => {
 								onClick={e => {
 									e.preventDefault()
 									e.stopPropagation()
-									dispatch(deleteChatById())
+									dispatch(deleteChatById(item._id))
 									if (params.id == item._id) {
 										navigate('/')
 									}

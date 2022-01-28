@@ -27,7 +27,7 @@ export const chatSlice = createSlice({
   initialState,
   reducers: {
     addChat: (state: any, action) => {
-      return [...state, {...action.payload, id: 0, users: []}]
+      return [...state, {...action.payload, id:(state.length+1), users: []}]
     },
     deleteChat: (state: any, action) => {
       return state.filter((item:any)=>item.id !=action.payload)

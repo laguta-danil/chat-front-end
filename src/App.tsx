@@ -10,6 +10,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { ChatComponent } from './components/ChatComponent';
+import { ChatList } from './components/ChatList';
 
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
       <HeaderMain />
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />}/>
+          <Route path="/" element={<ChatList />}/>
+          <Route path="/chat/:id" element={<HomePage/>} />
           <Route path="/signup" element={<RegLog />}/>
         </Routes>
       </Router>

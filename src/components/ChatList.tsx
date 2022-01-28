@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import { RootState, AppDispatch } from '../redux/store';
 import { addChat, ChatState } from '../redux/chatSlice';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const ChatList = () => {
 
@@ -36,7 +37,7 @@ export const ChatList = () => {
       header={<div>Chats</div>}
       bordered
       dataSource={chats}
-      renderItem={item => <List.Item><Text>{item.title}</Text></List.Item>}
+      renderItem={item => <Link to={`/chat/${item.id}`}><List.Item><Text>{item.title}</Text></List.Item></Link>}
     />
     <Button type="primary" block onClick={showModal}>Add chat</Button>
     <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>

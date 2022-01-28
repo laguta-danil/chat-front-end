@@ -2,17 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { List, Typography, Button, Modal, Form, Input } from "antd";
 import "antd/dist/antd.css";
 import { RootState, AppDispatch } from "../redux/store";
-import { addChat, deleteChat, ChatState } from "../redux/chatSlice";
-import { useState } from "react";
+import { addChat, deleteChat, ChatState, fetchChats, addNewChat } from "../redux/chatSlice";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 
 export const ChatList = () => {
   const { Text } = Typography;
 
-  const [title, setTitle] = useState("");
-
   const chats = useSelector((state: RootState) => state.chat);
+
+  useEffect(()=> {
+    dispatch(fetchChats());
+  }, [])
 
   const dispatch = useDispatch();
 
@@ -34,6 +36,8 @@ export const ChatList = () => {
     setIsModalVisible(false);
   };
 
+  const [chatData, setChatData] = useState({name: '', users:[], messages:[], _id:''});
+
   return (
     <div>
       <List
@@ -42,16 +46,16 @@ export const ChatList = () => {
         bordered
         dataSource={chats}
         renderItem={(item) => (
-          <Link to={`/chat/${item.id}`}>
-            <List.Item key={item.id}>
-              <Text>{item.title}</Text>
+          <Link to={`/chat/${item._id}`}>
+            <List.Item key={item._id}>
+              <Text>{item.name}</Text>
               <Button
                 type="primary"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  dispatch(deleteChat(item.id));
-                  if (params.id == item.id) {
+                  dispatch(deleteChat(item._id));
+                  if (params.id == item._id) {
                     navigate("/");
                   }
                 }}
@@ -78,15 +82,14 @@ export const ChatList = () => {
           autoComplete="off"
         >
           <Form.Item label="Chat name">
-            <Input value={title} onChange={(e) => setTitle(e.currentTarget.value)} />
+            <Input value={chatData.name} onChange={(e) => setChatData({...chatData, name:e.currentTarget.value})} />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button
               type="primary"
               onClick={() => {
-                dispatch(addChat({ title }));
-                setTitle("");
-                console.log(title);
+                dispatch(addNewChat(chatData));
+                setChatData({name: '', users:[], messages:[], _id:''});
               }}
             >
               Add chat

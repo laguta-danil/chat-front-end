@@ -67,7 +67,7 @@ export const chatSlice = createSlice({
 
     [addNewChat.fulfilled.type]: (state, action) => {
       console.log(action.payload)
-      return action.payload;
+      state.push(action.payload)
     },
     [addNewChat.pending.type]: (state) => {},
     [addNewChat.rejected.type]: (state, action: PayloadAction<any>) => {},

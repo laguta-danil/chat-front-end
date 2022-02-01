@@ -2,16 +2,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { List, Typography, Button, Modal, Form, Input } from 'antd'
 import 'antd/dist/antd.css'
 import { RootState } from '../redux/store'
-import { ChatState, fetchChats, addNewChat, deleteChatById } from '../redux/chatSlice'
-import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { fetchChats, addNewChat, deleteChatById } from '../redux/chatSlice'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, Route, useNavigate, useParams } from 'react-router-dom'
+import { ChatComponent } from './ChatComponent'
 
-export const ChatList = () => {
+export const ChatList: React.FC = () => {
   const [textData, setChatData] = useState({
 		name: '',
 		users: [],
 		messages: [],
 	})
+
 
 	const { Text } = Typography
 
@@ -20,7 +22,7 @@ export const ChatList = () => {
 
 	useEffect(() => {
 		dispatch(fetchChats())
-	}, [chats])
+	}, [dispatch])
 
 	
 
@@ -42,16 +44,22 @@ export const ChatList = () => {
 		setIsModalVisible(false)
 	}
 
+	const linkToChat = () => {
+		return <>
+		</>
+	}
+
 
 	return (
-		<div>
+		<>
 			<List
 				size='small'
 				header={<div>Chats</div>}
 				bordered
 				dataSource={chats}
-				renderItem={item => (
-					<Link to={`/chat/${item._id}`}>
+				renderItem={item => (	
+					<Link to={`/chat/${item._id}`}> 
+					<ChatComponent http={item._id} />
 						<List.Item key={item._id}>
 							<Text>{item.name}</Text>
 							<Button
@@ -60,7 +68,7 @@ export const ChatList = () => {
 									e.preventDefault()
 									e.stopPropagation()
 									dispatch(deleteChatById(item._id))
-									if (params.id == item._id) {
+									if (params.id === item._id) {
 										navigate('/')
 									}
 								}}
@@ -100,6 +108,7 @@ export const ChatList = () => {
 							onClick={() => {
 								dispatch(addNewChat(textData))
 								setChatData({ ...textData, name: '', users: [], messages: []})
+								linkToChat()
                 console.log(textData)
 							}}
 						>
@@ -108,6 +117,7 @@ export const ChatList = () => {
 					</Form.Item>
 				</Form>
 			</Modal>
-		</div>
+			
+		</>
 	)
 }

@@ -1,17 +1,22 @@
 import { AliwangwangOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Input, List } from "antd";
-import { useState } from "react";
+import { Props, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessages, deleteMessage } from "../redux/messagesSlice";
+import { useSearchParams } from "react-router-dom";
+import { addMessageInChat } from "../redux/chatSlice";
+import { deleteMessage } from "../redux/messagesSlice";
 import { RootState } from "../redux/store";
 
-export const ChatComponent = () => {
+export const ChatComponent: React.FC<any> = ({http}) => {
   const [state, setState] = useState("");
-  const messages = useSelector((state: RootState) => state.ms);
+  const chats = useSelector((state: RootState) => state.chat)
+  const mainChat = chats.filter((el)=> el._id === http )
   const dispatch = useDispatch();
 
+  // console.log(mainChat[0].messages)
   return (
-    <>
+    <> 
+      
       <List
         style={{
           width: "calc(100%)",
@@ -21,7 +26,7 @@ export const ChatComponent = () => {
           paddingBottom: 10,
         }}
       >
-        {messages.map((el, i: any) => {
+        {/* {mainChat[0].messages.map((el, i: any) => {
           return (
             <List.Item
               style={{
@@ -32,7 +37,7 @@ export const ChatComponent = () => {
               }}
               key={i}
             >
-              {el.message}
+              {el}
               <Button
                 style={{
                   color: "white",
@@ -42,12 +47,12 @@ export const ChatComponent = () => {
                 size="small"
                 icon={<DeleteOutlined />}
                 onClick={(e) => {
-                  dispatch(deleteMessage(el.id));
+                  dispatch(deleteMessage(i));
                 }}
               ></Button>
             </List.Item>
           );
-        })}
+        })} */}
       </List>
       <Input.Group compact>
         <Input
@@ -65,7 +70,7 @@ export const ChatComponent = () => {
             border: "1px solid #610b00",
           }}
           onClick={() =>
-            state ? dispatch(addMessages(state)) && setState("") : null
+            state ? dispatch(addMessageInChat({http, state})) && setState("") : null
           }
         >
           Send

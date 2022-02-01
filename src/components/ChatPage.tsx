@@ -13,6 +13,7 @@ export const ChatPage = () => {
 				<Col span={20}>
 					<ChatComponent />
 				</Col>
+				{/* <ChatComponent sssss={item._id} />	 */}
 			</Row>
 		</>
 	)

@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd'
 import React from 'react'
-import { ChatComponent } from './ChatComponent'
 import { ChatList } from './ChatList'
 
 export const HomePage = () => {

@@ -1,19 +1,17 @@
-import { Form, Input, Button, Checkbox } from 'antd'
-import { useEffect, useState } from 'react'
-
-import { useDispatch, useSelector, useStore } from 'react-redux'
+import { Button, Form, Input } from 'antd'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { signupUser } from '../redux/users.auth.actions'
-import { clearState, userSelector } from '../redux/userSlice'
-
+import { userSelector } from '../redux/userSlice'
 
 export const SignUp = () => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
 	const [state, setState] = useState()
-  const { isFetching, isSuccess, isError, errorMessage } =
+	const { isFetching, isSuccess, isError, errorMessage } =
 		useSelector(userSelector)
-	
-	const [form] = Form.useForm()	
+
+	const [form] = Form.useForm()
 
 	const onFinish = (values: any) => {
 		dispatch(signupUser(values))
@@ -28,11 +26,9 @@ export const SignUp = () => {
 		console.log('Failed:', errorInfo)
 	}
 
-	
 	const handleSubmitReg = () => {
 		console.log('click on submit Reg')
 	}
-
 
 	return (
 		<Form

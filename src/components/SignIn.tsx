@@ -1,7 +1,5 @@
-import { Form, Input, Button} from 'antd'
+import { Form, Input, Button } from 'antd'
 import { useState } from 'react'
-
-import { useDispatch } from 'react-redux'
 
 export const SignIn = () => {
 	const [state, setState] = useState()
@@ -15,8 +13,6 @@ export const SignIn = () => {
 	const onFinishFailed = (errorInfo: any) => {
 		console.log('Failed:', errorInfo)
 	}
-
-	const dispatch = useDispatch()
 
 	const handleSubmitReg = () => {
 		console.log('click on submit Reg')

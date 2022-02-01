@@ -60,7 +60,9 @@ export const SignIn = () => {
 			</Form.Item>
 
 			<Form.Item wrapperCol={{ offset: 6, span: 12 }}>
-				<Button>Submit</Button>
+				<Button type='primary' htmlType='submit'>
+					Submit
+				</Button>
 			</Form.Item>
 		</Form>
 	)

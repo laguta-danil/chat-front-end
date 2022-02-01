@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import { fetchChats } from './redux/chatSlice'
 
 function App() {
-
 	const dispatch = useDispatch()
 
 	useEffect(() => {

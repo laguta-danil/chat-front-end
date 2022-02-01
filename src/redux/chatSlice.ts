@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { stat } from "fs";
+import { act } from "react-dom/test-utils";
 
 export interface ChatState {
   name: string;
@@ -14,7 +14,7 @@ const initialState: Array<ChatState> = [
 ];
 
 export const fetchChats = createAsyncThunk(
-  "chats/fetchAll",
+  "chats/fetchChats",
   async (thunkAPI) => {
     try {
       const res: any = await axios.get(`http://localhost:5000/chats`);
@@ -31,8 +31,7 @@ export const addNewChat = createAsyncThunk(
   async (chatData: any, thunkAPI) =>{
     try {
       const res: any = await axios.post(`http://localhost:5000/chats`, chatData)
-      return 
-       
+       return res.data;
     } catch (error) {
       console.log(error)
     }
@@ -42,9 +41,11 @@ export const addNewChat = createAsyncThunk(
 
 export const deleteChatById = createAsyncThunk(
   "chats/deleteChatById",
-  async (id:string, thunkAPI) => {
+  async (id:any, thunkAPI) => {
     try {
-      const res: any = await axios.delete(`http://localhost:5000/chats/${id}`)
+      const res: any = await axios.delete(`http://localhost:5000/chats/${id}`);
+      const data = res.data;
+      return id;
     } catch (error) {
       console.log(error)
     }
@@ -59,22 +60,24 @@ export const chatSlice = createSlice({
   },
   extraReducers: {
     [fetchChats.fulfilled.type]: (state, action) => {
-      return state = action.payload;
+      return action.payload;
     },
     [fetchChats.pending.type]: (state) => {},
     [fetchChats.rejected.type]: (state, action: PayloadAction<any>) => {},
+
     [addNewChat.fulfilled.type]: (state, action) => {
-      
-      return [...state, action.payload] && console.log(action.payload)
+      console.log(action.payload)
+      return action.payload;
     },
     [addNewChat.pending.type]: (state) => {},
-    [addNewChat.rejected.type]: (state, action: PayloadAction<string>) => {},
+    [addNewChat.rejected.type]: (state, action: PayloadAction<any>) => {},
+
     [deleteChatById.fulfilled.type]: (state, action) => {
       console.log(action.payload)
       return state.filter((item)=>item._id!=action.payload)
     },
     [deleteChatById.pending.type]: (state) => {},
-    [deleteChatById.rejected.type]: (state, action: PayloadAction<string>) => {},
+    [deleteChatById.rejected.type]: (state, action: PayloadAction<any>) => {},
   },
   
 });
